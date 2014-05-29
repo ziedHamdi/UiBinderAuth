@@ -38,9 +38,12 @@ The objective of the library being non intrusive is a key concept. Therefore, a 
 Where will it evolve
 The UiBinder? generates too many code that is hard to debug since it is text that has to be compiled. This library will gradually replace parts of the generated "hard coded text" by extensible calls to compiled code (that can be separately unit tested).
 
-For now it is done only for create() and after <g:Xwidget > initialization is done : the init() method.
+For now it is done only for after <g:Xwidget > initialization is done : the init() method.
 
 But all what happens between can gradually be moved to compiled code: attached event handles, styleName css setting. Also direct accessor calls like <g:TextBox text="meHere"> can be proxied to be interceptable. The generated code will do something like:
 
   if( proxy.canCall( fieldName ) ) 
     field.setText(); 
+
+Where should I start?
+clone this library and get started: https://github.com/ziedHamdi/UiBinderAutho/blob/master/README.md

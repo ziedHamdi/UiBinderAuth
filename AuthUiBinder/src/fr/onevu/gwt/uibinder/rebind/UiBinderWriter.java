@@ -57,6 +57,7 @@ import java.util.Map;
 
 import fr.onevu.gwt.uibinder.attributeparsers.AttributeParsers;
 import fr.onevu.gwt.uibinder.client.LazyDomElement;
+import fr.onevu.gwt.uibinder.client.factory.UiBinderWidgetFactory;
 import fr.onevu.gwt.uibinder.client.impl.AbstractUiRenderer;
 import fr.onevu.gwt.uibinder.core.shared.impl.StringCase;
 import fr.onevu.gwt.uibinder.elementparsers.AttributeMessageParser;
@@ -1655,7 +1656,13 @@ public class UiBinderWriter implements Statements {
 		designTime.writeAttributes(this);
 		w.newline();
 
-		w.write("return new Widgets(owner).%s;", rootField.getNextReference());
+		w.write("//UiBinderWidgetFactory is warned that a UiBinder instance was created. the field name is empty for this call");
+		w.write("Widgets implementation = new Widgets(owner);");
+		w.write("//We call the method to get the first element to trigger it being built");
+		w.write("%s firstElem = implementation.%s;", uiRootType.getParameterizedQualifiedSourceName(), rootField.getNextReference());
+		w.write("%1$s.init(%2$s.class, \"%3$s\", \"\", %4$s);", UiBinderWidgetFactory.class.getName(), uiOwnerType.getQualifiedSourceName(),
+				uiOwnerType.getQualifiedSourceName(), "owner");
+		w.write("return firstElem;");
 		w.outdent();
 		w.write("}");
 

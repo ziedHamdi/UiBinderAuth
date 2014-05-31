@@ -73,7 +73,7 @@ public class FieldWriterOfExistingType extends AbstractFieldWriter {
 			return "";
 
 		JClassType widgetFactory = typeOracle.findType(UiBinderWidgetFactory.class.getName());
-		String initilizer = String.format("%2$s.init(%1$s.class, \"%3$s\", \"%4$s\", %4$s);", getQualifiedSourceName(), widgetFactory.getQualifiedSourceName(),
+		String initilizer = String.format("%1$s.init(%2$s.class, \"%3$s\", \"%4$s\", %4$s);", widgetFactory.getQualifiedSourceName(), getQualifiedSourceName(),
 				ownerClass.getOwnerType().getQualifiedSourceName(), name);
 		return initilizer;
 	}

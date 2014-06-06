@@ -1660,6 +1660,10 @@ public class UiBinderWriter implements Statements {
 		w.write("Widgets implementation = new Widgets(owner);");
 		w.write("//We call the method to get the first element to trigger it being built");
 		w.write("%s firstElem = implementation.%s;", uiRootType.getParameterizedQualifiedSourceName(), rootField.getNextReference());
+		// NEXT in future version, add an attach handler to execute after the
+		// constructor of the UiBinder class has finished . This call is too early
+		// since createAndBindUi still didn't return, so the constructor didn't
+		// finish its execution
 		w.write("%1$s.init(%2$s.class, \"%3$s\", \"\", %4$s);", UiBinderWidgetFactory.class.getName(), uiOwnerType.getQualifiedSourceName(),
 				uiOwnerType.getQualifiedSourceName(), "owner");
 		w.write("return firstElem;");

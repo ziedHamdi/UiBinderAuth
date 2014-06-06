@@ -13,6 +13,13 @@ import com.google.gwt.core.client.GWT;
 public class UiBinderWidgetFactory {
 	protected static ContextSpecificWidgetCreator contextSpecificWidgetCreator;
 
+	/**
+	 * Initializes a widget as specified in the metadata settings
+	 * @param widget the widget class is for forward compatibility, when fields will be allowed to be null, we will need to know the supposed type of the the widget to pass it to the correct handler
+	 * @param uiBinder
+	 * @param fieldName
+	 * @param field
+	 */
 	public static <T> void init(Class<T> widget, String uiBinder, String fieldName, T field) {
 		getContextSpecificWidgetCreator().init(widget, uiBinder, fieldName, field);
 	}

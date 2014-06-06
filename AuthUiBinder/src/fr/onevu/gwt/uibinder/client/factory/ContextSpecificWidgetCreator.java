@@ -1,5 +1,6 @@
 package fr.onevu.gwt.uibinder.client.factory;
 
+import com.google.gwt.uibinder.client.UiBinder;
 
 /**
  * If you want to control the creation of widgets you can implement this class
@@ -27,6 +28,15 @@ public interface ContextSpecificWidgetCreator {
 	 * Initialization like styleName in UiBinder is written by statements in the
 	 * generator). We give a chance here to add things on top of what was already
 	 * set from the XML
+	 * 
+	 * WARNING please keep in mind that if the parameter field is empty, then this
+	 * method is called for the root element of an UiBinder xml file. This method
+	 * is called from within the {@link UiBinder#createAndBindUi(Object)} method,
+	 * so your fields are still not initialized by the constructor, this might be
+	 * too early for your needs.
+	 * 
+	 * Future versions will include a dom attach handler that will call this
+	 * method later
 	 * 
 	 * @param clazz
 	 *          the class is passed in case the field was not created (is null)
